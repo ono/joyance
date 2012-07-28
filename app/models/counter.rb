@@ -2,7 +2,7 @@ class Counter < ActiveRecord::Base
   attr_accessible :count, :date, :gender, :hour, :minute, :sentiment, :stream
 
   class << self
-    def monitor(stream_name)
+    def count_up(stream_name)
       s = Stream.new stream_name
       s.consume do |json|
         intr = Interaction.new(json)
