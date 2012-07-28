@@ -27,7 +27,7 @@ class Stream
   end
 
   def load_definition(name)
-    filepath = "#{Rails.root}/app/definitions/#{name}.datasift"
+    filepath = "#{Rails.root}/app/streams/#{name}.datasift"
     File.open(filepath, "rb").read
   end
 end

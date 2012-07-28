@@ -39,7 +39,7 @@ All support json format. e.g. http://127.0.0.1:3000/stream/olympics.json
 
 ## Stream definition
 
-You can add streams under [app/definitions](https://github.com/ono/joyance/tree/master/app/definitions).
+You can add streams under [app/streams](https://github.com/ono/joyance/tree/master/app/streams).
 
 Once you define a stream, you can count up the stream like below.
 
