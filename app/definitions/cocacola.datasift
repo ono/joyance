@@ -1,11 +1,12 @@
 return {
-interaction.sample < 1 and (
+interaction.sample < 100 and (
 interaction.content contains "olympic"
 or interaction.title contains "olympics"
 or links.title contains "olympics"
 or interaction.content contains "#london2012"
 or interaction.title contains "#london2012"
 ) and (
-interaction.content contains "coca"
+interaction.content contains "coke"
+or interaction.content contains "cola"
 )
 }
