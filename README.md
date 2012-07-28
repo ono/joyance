@@ -1,4 +1,4 @@
-## Joyce
+## Joyance
 
 Joyance is a project at [London MMXII Hackathon](http://mmxiihack.org) which
 mesures and visualizes people's joyance for a theme.
