@@ -31,11 +31,11 @@ You don't have to stop script to go to step 4.
 
 ## Access
 
-* Stream (every minute total): http://127.0.0.1:3000/stream/olympics
-* Stream (all time total): http://127.0.0.1:3000/stream/olympics/total
+* Stream (every minute total): http://127.0.0.1:3000/streams/olympics
+* Stream (all time total): http://127.0.0.1:3000/streams/olympics/total
 * List all streams (every minute total): http://127.0.0.1:3000/counters
 
-All support json format. e.g. http://127.0.0.1:3000/stream/olympics.json
+All support json format. e.g. http://127.0.0.1:3000/streams/olympics.json
 
 ## Stream definition
 
