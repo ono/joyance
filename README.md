@@ -36,7 +36,7 @@ You can add streams under [app/definitions](https://github.com/ono/joyance/tree/
 
 Once you define a stream, you can count up the stream like below.
 
-        > Counter.count_up :new_stream
+    > Counter.count_up :new_stream
 
 
 
