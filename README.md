@@ -25,10 +25,17 @@ It uses [Datasift](http://datasift.com/) as data backend.
         > Counter.count_up :olympics
 You don't have to stop script to go to step 4.
 
-4. Access via http
+4. Run server
 
         % rails s
-Then access `http://127.0.0.1:3000/counters` or `http://127.0.0.1:3000/counters.json`.
+
+## Access
+
+* Stream (every minute total): http://127.0.0.1:3000/stream/olympics
+* Stream (all time total): http://127.0.0.1:3000/stream/olympics/total
+* List all streams (every minute total): http://127.0.0.1:3000/counters
+
+All support json format. e.g. http://127.0.0.1:3000/stream/olympics.json
 
 ## Stream definition
 
