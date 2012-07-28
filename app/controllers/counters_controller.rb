@@ -1,4 +1,25 @@
 class CountersController < ApplicationController
+
+  def stream
+    @counters = Counter.where(stream: params[:stream]).all
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @counters }
+    end
+  end
+
+  def stream_total
+    @counters = Counter.where(stream: params[:stream]).
+                    select("sentiment, sum(count) as total").
+                    group("sentiment")
+
+    respond_to do |format|
+      format.html { render :total }
+      format.json { render json: @counters }
+    end
+  end
+
   # GET /counters
   # GET /counters.json
   def index

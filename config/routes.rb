@@ -1,4 +1,6 @@
 Joyance::Application.routes.draw do
+  match "/streams/:stream" => "counters#stream"
+  match "/streams/:stream/total" => "counters#stream_total"
   resources :counters
 
   # The priority is based upon order of creation:

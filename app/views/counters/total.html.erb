@@ -1,0 +1,16 @@
+<h1>Listing counters (<%=params[:stream]%>)</h1>
+
+<table>
+  <tr>
+    <th>Sentiment</th>
+    <th>Total</th>
+  </tr>
+
+<% @counters.each do |counter| %>
+  <tr>
+    <td><%= counter.sentiment %></td>
+    <td><%= counter.total%></td>
+  </tr>
+<% end %>
+</table>
+
