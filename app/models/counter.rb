@@ -26,7 +26,7 @@ class Counter < ActiveRecord::Base
         :hour => now.hour,
         :minute => now.min,
         :stream => stream,
-        :gender => interaction.gender,
+        :gender => "n/a", # gender information is useless
         :sentiment => interaction.sentiment
       }
 
