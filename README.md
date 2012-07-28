@@ -21,8 +21,8 @@ It uses [Datasift](http://datasift.com/) as data backend.
 
 3. Run script which counts up joyance
 
-        % rails c
-        > Counter.count_up :olympics
+        % rails runner "Counter.count_up :olympics"
+
 You don't have to stop script to go to step 4.
 
 4. Run server
