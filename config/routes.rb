@@ -1,4 +1,6 @@
 Joyance::Application.routes.draw do
+  resources :counters
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,45 @@
+<%= form_for(@counter) do |f| %>
+  <% if @counter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@counter.errors.count, "error") %> prohibited this counter from being saved:</h2>
+
+      <ul>
+      <% @counter.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :stream %><br />
+    <%= f.text_field :stream %>
+  </div>
+  <div class="field">
+    <%= f.label :sentiment %><br />
+    <%= f.text_field :sentiment %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.text_field :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :hour %><br />
+    <%= f.number_field :hour %>
+  </div>
+  <div class="field">
+    <%= f.label :minute %><br />
+    <%= f.number_field :minute %>
+  </div>
+  <div class="field">
+    <%= f.label :count %><br />
+    <%= f.number_field :count %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

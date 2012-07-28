@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Stream:</b>
+  <%= @counter.stream %>
+</p>
+
+<p>
+  <b>Sentiment:</b>
+  <%= @counter.sentiment %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @counter.gender %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @counter.date %>
+</p>
+
+<p>
+  <b>Hour:</b>
+  <%= @counter.hour %>
+</p>
+
+<p>
+  <b>Minute:</b>
+  <%= @counter.minute %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%= @counter.count %>
+</p>
+
+
+<%= link_to 'Edit', edit_counter_path(@counter) %> |
+<%= link_to 'Back', counters_path %>

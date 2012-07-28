@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  stream: MyString
+  sentiment: MyString
+  gender: MyString
+  date: 2012-07-28
+  hour: 1
+  minute: 1
+  count: 1
+
+two:
+  stream: MyString
+  sentiment: MyString
+  gender: MyString
+  date: 2012-07-28
+  hour: 1
+  minute: 1
+  count: 1

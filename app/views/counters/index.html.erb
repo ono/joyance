@@ -1,0 +1,35 @@
+<h1>Listing counters</h1>
+
+<table>
+  <tr>
+    <th>Stream</th>
+    <th>Sentiment</th>
+    <th>Gender</th>
+    <th>Date</th>
+    <th>Hour</th>
+    <th>Minute</th>
+    <th>Count</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @counters.each do |counter| %>
+  <tr>
+    <td><%= counter.stream %></td>
+    <td><%= counter.sentiment %></td>
+    <td><%= counter.gender %></td>
+    <td><%= counter.date %></td>
+    <td><%= counter.hour %></td>
+    <td><%= counter.minute %></td>
+    <td><%= counter.count %></td>
+    <td><%= link_to 'Show', counter %></td>
+    <td><%= link_to 'Edit', edit_counter_path(counter) %></td>
+    <td><%= link_to 'Destroy', counter, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Counter', new_counter_path %>
