@@ -12,9 +12,10 @@ class Counter < ActiveRecord::Base
           counter.count ||= 0
           counter.count += 1
           counter.save!
+
+          p "#{"%02d" % counter.hour}:#{"%02d" % counter.minute}-#{stream_name}-#{intr.sentiment}: #{counter.count}"
         end
 
-        p "#{Time.now}:#{stream_name}:#{intr.sentiment}:#{intr.gender}"
       end
     end
 
