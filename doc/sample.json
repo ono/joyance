@@ -1,0 +1,49 @@
+{"sentiment"=>"positive",
+"raw"=>
+{"interaction"=>
+  {"source"=>"UberSocial for BlackBerry",
+   "author"=>
+    {"username"=>"TeenashThaReal",
+     "name"=>"Sir Calmfidence",
+     "id"=>182904119,
+     "avatar"=>
+      "http://a0.twimg.com/profile_images/2434261054/facial_normal.jpg",
+     "link"=>"http://twitter.com/TeenashThaReal"},
+   "type"=>"twitter",
+   "created_at"=>"Sun, 29 Jul 2012 09:27:57 +0000",
+   "content"=>
+    "Good on you Kirsty...do best in the semis! #TeamZimbabwe #London2012",
+   "id"=>"1e1d95fae774ac80e074b95b8c3deae2",
+   "link"=>"http://twitter.com/TeenashThaReal/statuses/229508551754792960",
+   "tags"=>["Positive"]},
+ "klout"=>{"score"=>43},
+ "language"=>{"tag"=>"en", "confidence"=>61},
+ "salience"=>{"content"=>{"sentiment"=>9}},
+ "trends"=>
+  {"type"=>["Phoenix", "Orlando"],
+   "content"=>["#london2012"],
+   "source"=>["twitter"]},
+ "twitter"=>
+  {"created_at"=>"Sun, 29 Jul 2012 09:27:57 +0000",
+   "id"=>"229508551754792960",
+   "source"=>
+    "<a href=\"http://ubersocial.com\" rel=\"nofollow\">UberSocial for BlackBerry</a>",
+   "text"=>
+    "Good on you Kirsty...do best in the semis! #TeamZimbabwe #London2012",
+   "user"=>
+    {"name"=>"Sir Calmfidence",
+     "url"=>"http://www.facebook.com/TeeNash10",
+     "description"=>
+      "Dipped in a bowl of sugar at birth..Ambitious and Calmfident! I want you to laugh n dance with me! #Football #MUFC #Music #Food #Art Thank you & you're welcome!",
+     "location"=>"My Observatory...",
+     "statuses_count"=>7613,
+     "followers_count"=>209,
+     "friends_count"=>307,
+     "screen_name"=>"TeenashThaReal",
+     "lang"=>"en",
+     "time_zone"=>"Athens",
+     "utc_offset"=>7200,
+     "id"=>182904119,
+     "id_str"=>"182904119",
+     "created_at"=>"Wed, 25 Aug 2010 17:45:28 +0000"}}}
+}
