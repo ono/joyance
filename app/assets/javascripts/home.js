@@ -155,7 +155,7 @@ $(function (data) {
   // Get json data
   d3.json(App.config.sentiments_totals_url, function(data) {
     App.data = data;
-    renderLoveHateGraph(data);
+    // renderLoveHateGraph(data);
     collidingBallsGraph(data);
   });
 });
