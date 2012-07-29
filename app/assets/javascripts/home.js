@@ -164,22 +164,25 @@ function updateForceGraph(data) {
 
 $(function () {
   // Initial load from db
-  d3.json(App.config.sentiments_totals_url, function(data) {
-    App.data = data;
-    App.prevData = data;
-    initForceGraph(data);
-  });
+  // d3.json(App.config.sentiments_totals_url, function(data) {
+  //   App.data = data;
+  //   App.prevData = data;
+  // });
 
   var pusher = new Pusher(App.config.pusher_app_id); // Replace with your app key
   var channel = pusher.subscribe(App.config.stream);
 
- channel.bind('recent', function(data) {
-   console.log(_.pluck(App.prevData, "sentiment"));
-   console.log(_.pluck(App.prevData, "total"));
-   updateForceGraph(data);
-   App.prevData = data;
-   console.log(_.pluck(data, "total"));
- });
+  App.prevData = null;
+  channel.bind('recent', function(data) {
+    if (!App.prevData) {
+      initForceGraph(data);
+    }
+    console.log(_.pluck(App.prevData, "sentiment"));
+    console.log(_.pluck(App.prevData, "total"));
+    updateForceGraph(data);
+    App.prevData = data;
+    console.log(_.pluck(data, "total"));
+  });
  channel.bind('tweet', function(data) {
    console.log(data);
    // App.data = data;
