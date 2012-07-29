@@ -163,24 +163,22 @@ function updateForceGraph(data) {
 }
 
 $(function () {
-  // Get json data
+  // Initial load from db
   d3.json(App.config.sentiments_totals_url, function(data) {
     App.data = data;
     App.prevData = data;
     initForceGraph(data);
-    // rffpdenderLoveHateGraph(data);
   });
 
   var pusher = new Pusher(App.config.pusher_app_id); // Replace with your app key
   var channel = pusher.subscribe(App.config.stream);
 
- channel.bind('total', function(data) {
-   console.log(data);
-   // forceGraph(data);
+ channel.bind('recent', function(data) {
+   console.log(_.pluck(App.prevData, "sentiment"));
+   console.log(_.pluck(App.prevData, "total"));
    updateForceGraph(data);
    App.prevData = data;
-   // App.data = data;
-   // renderLoveHateGraph(data);
+   console.log(_.pluck(data, "total"));
  });
  channel.bind('tweet', function(data) {
    console.log(data);
