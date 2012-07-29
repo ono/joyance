@@ -11,6 +11,7 @@ App.config = {
 
   forceWidth: 900,
   forceHeight: 700,
+  forceMaxSize: 300,
   forceGravity: 0.05,
   force_container_sel: "#force-graph",
 };
@@ -65,6 +66,8 @@ function initForceGraph(data) {
   var w = App.config.forceWidth,
       h = App.config.forceHeight;
 
+  App.circleScale = d3.scale.linear()
+      .range([0, App.config.forceMaxSize]);
   App.svg = d3.select(App.config.force_container_sel).append("svg:svg")
       .attr("width", w)
       .attr("height", h);
@@ -76,13 +79,15 @@ function updateForceGraph(data) {
   var w = App.config.forceWidth,
       h = App.config.forceHeight,
       g = App.config.forceGravity,
-    nodes = data.map(function(d) {
-      return {
-        sentiment: d.sentiment,
-        total: d.total,
-        radius: d.total
-      };
-    });
+      overallTotal = _.reduce(data, function(memo, d) { return memo + d.total; }, 0),
+      nodes = data.map(function(d) {
+        return {
+          sentiment: d.sentiment,
+          total: d.total,
+          radius: App.circleScale(d.total / overallTotal)
+        };
+      });
+
   App.nodes = nodes;
 
   var force = d3.layout.force()
