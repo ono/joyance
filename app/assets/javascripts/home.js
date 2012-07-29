@@ -150,9 +150,25 @@ function forceGraph(data) {
 
 $(function (data) {
   // Get json data
-  d3.json(App.config.sentiments_totals_url, function(data) {
-    App.data = data;
-    // rffpdenderLoveHateGraph(data);
-    forceGraph(data);
-  });
+  // d3.json(App.config.sentiments_totals_url, function(data) {
+  //   App.data = data;
+  //   // rffpdenderLoveHateGraph(data);
+  //   forceGraph(data);
+  // });
+
+  var pusher = new Pusher(App.config.pusher_app_id); // Replace with your app key
+  var channel = pusher.subscribe(App.config.stream);
+
+ channel.bind('total', function(data) {
+   console.log(data);
+   forceGraph(data);
+   // App.data = data;
+   // renderLoveHateGraph(data);
+ });
+ channel.bind('tweet', function(data) {
+   console.log(data);
+   // App.data = data;
+   // renderLoveHateGraph(data);
+ });
+
 });
