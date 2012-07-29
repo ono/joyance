@@ -8,10 +8,10 @@ App.config = {
   canvasHeight: 500,
   graph_container_sel: "#love-hate-bar-graph",
 
-  forceWidth: 500,
-  forceHeight: 500,
+  forceWidth: 900,
+  forceHeight: 700,
   forceGravity: 0.05,
-  collision_container_sel: "#collision-balls-graph"
+  force_container_sel: "#force-graph"
 };
 
 function renderLoveHateGraph(data) {
@@ -155,7 +155,7 @@ $(function (data) {
   // Get json data
   d3.json(App.config.sentiments_totals_url, function(data) {
     App.data = data;
-    // renderLoveHateGraph(data);
+    // rffpdenderLoveHateGraph(data);
     collidingBallsGraph(data);
   });
 });
