@@ -1,0 +1,15 @@
+return {
+(
+interaction.content contains "olympic"
+or interaction.content contains "olympics"
+or interaction.content contains "game"
+or interaction.content contains "games"
+) and (
+interaction.content contains "transport"
+or interaction.content contains "tube"
+or interaction.content contains "underground"
+or interaction.content contains "bus"
+or interaction.content contains "train"
+or interaction.content contains "overground"
+)
+}
