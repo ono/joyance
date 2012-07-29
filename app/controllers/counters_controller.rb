@@ -10,7 +10,7 @@ class CountersController < ApplicationController
   end
 
   def stream_total
-    @counters = Counter.total_by_sentiment params[:sentiment]
+    @counters = Counter.total_by_sentiment params[:stream]
 
     respond_to do |format|
       format.html { render :total }
