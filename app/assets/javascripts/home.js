@@ -8,8 +8,9 @@ App.config = {
   canvasHeight: 500,
   graph_container_sel: "#love-hate-bar-graph",
 
-  collisionWidth: 500,
-  collisionHeight: 500,
+  forceWidth: 500,
+  forceHeight: 500,
+  forceGravity: 0.05,
   collision_container_sel: "#collision-balls-graph"
 };
 
@@ -59,21 +60,28 @@ function renderLoveHateGraph(data) {
   }
 
 function collidingBallsGraph(data) {
-  var w = App.config.collisionWidth,
-      h = App.config.collisionHeight;
+  var w = App.config.forceWidth,
+      h = App.config.forceHeight,
+      g = App.config.forceGravity;
 
-  var nodes = d3.range(200).map(function() { return {radius: Math.random() * 12 + 4}; }),
-      color = d3.scale.category10();
+  var nodes = data.map(function(d) {
+      return {
+        sentiment: d.sentiment,
+        radius: d.total
+      };
+    }),
+    color = d3.scale.category10();
+  App.nodes = nodes;
 
   var force = d3.layout.force()
-      .gravity(0.05)
+      .gravity(g)
       .charge(function(d, i) { return i ? 0 : -2000; })
       .nodes(nodes)
       .size([w, h]);
 
-  var root = nodes[0];
-  root.radius = 0;
-  root.fixed = true;
+  // Make the neutral node the mouse node
+  var mouseNode = _.find(App.nodes, function(n) { return n.sentiment == "neutral";});;
+  mouseNode.fixed = true;
 
   force.start();
 
@@ -82,10 +90,17 @@ function collidingBallsGraph(data) {
       .attr("height", h);
 
   svg.selectAll("circle")
-      .data(nodes.slice(1))
+      .data(nodes)
     .enter().append("svg:circle")
-      .attr("r", function(d) { return d.radius - 2; })
-      .style("fill", function(d, i) { return color(i % 3); });
+      .attr("data-sentiment", function(d) { return d.sentiment; })
+      .attr("r", function(d) {
+        console.log(d)
+        return d.radius - 2;
+      })
+      .style("fill", function(d, i) {
+        console.log(d);
+        return color(i % 3);
+      });
 
   force.on("tick", function(e) {
     var q = d3.geom.quadtree(nodes),
@@ -103,8 +118,8 @@ function collidingBallsGraph(data) {
 
   svg.on("mousemove", function() {
     var p1 = d3.svg.mouse(this);
-    root.px = p1[0];
-    root.py = p1[1];
+    mouseNode.px = p1[0];
+    mouseNode.py = p1[1];
     force.resume();
   });
 
