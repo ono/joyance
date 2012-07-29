@@ -96,10 +96,6 @@ function updateForceGraph(data) {
       .nodes(nodes)
       .size([w, h]);
 
-  // Make the neutral node the mouse node
-  var mouseNode = _.find(App.nodes, function(n) { return n.sentiment == "neutral";});
-  mouseNode.fixed = true;
-
   force.start();
 
   App.svg.selectAll("circle")
@@ -128,12 +124,15 @@ function updateForceGraph(data) {
         .attr("cy", function(d) { return d.y; });
   });
 
-  App.svg.on("mousemove", function() {
-    var p1 = d3.svg.mouse(this);
-    mouseNode.px = p1[0];
-    mouseNode.py = p1[1];
-    force.resume();
-  });
+  // Make the neutral node the mouse node
+  // var mouseNode = _.find(App.nodes, function(n) { return n.sentiment == "neutral";});
+  // mouseNode.fixed = true;
+  // App.svg.on("mousemove", function() {
+  //   var p1 = d3.svg.mouse(this);
+  //   mouseNode.px = p1[0];
+  //   mouseNode.py = p1[1];
+  //   force.resume();
+  // });
 
   function collide(node) {
     var r = node.radius + 16,
