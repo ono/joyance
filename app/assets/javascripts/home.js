@@ -11,7 +11,7 @@ App.config = {
 
   forceWidth: 800,
   forceHeight: 600,
-  forceMaxSize: 300,
+  forceMaxSize: 200,
   forceGravity: 0.05,
   force_container_sel: "#force-graph",
 };
@@ -174,6 +174,9 @@ $(function () {
 
   App.prevData = null;
   channel.bind('recent', function(data) {
+    // Filter out neutral
+    data = _.reject(data, function(d) { return d.sentiment == "neutral" });
+    console.log(data);
     if (!App.prevData) {
       initForceGraph(data);
     }
@@ -183,10 +186,11 @@ $(function () {
     App.prevData = data;
     console.log(_.pluck(data, "total"));
   });
- channel.bind('tweet', function(data) {
-   console.log(data);
-   // App.data = data;
-   // renderLoveHateGraph(data);
- });
+
+  channel.bind('tweet', function(data) {
+    console.log(data);
+    // App.data = data;
+    // renderLoveHateGraph(data);
+  });
 
 });
