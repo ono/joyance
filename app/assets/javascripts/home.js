@@ -1,11 +1,12 @@
 var App = App || {};
 
 App.config = {
-
-  sentiments_totals_url: "/streams/olympics/total.json",
-
   canvasWidth: 500,
   canvasHeight: 500,
+
+  pusher_app_id: "a8d6b011ca9900b8ece8",
+  stream: "olympics",
+  sentiments_totals_url: "/streams/olympics/total.json",
   graph_container_sel: "#love-hate-bar-graph",
 
   forceWidth: 900,
@@ -22,6 +23,7 @@ function renderLoveHateGraph(data) {
 
     var vis = d3.select("body")
         .append("svg:svg")              //create the SVG element inside the <body>
+            .attr("id", "pie_chart")
         .data([data])                   //associate our data with the document
             .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
             .attr("height", h)
@@ -150,18 +152,18 @@ function forceGraph(data) {
 
 $(function (data) {
   // Get json data
-  // d3.json(App.config.sentiments_totals_url, function(data) {
-  //   App.data = data;
-  //   // rffpdenderLoveHateGraph(data);
-  //   forceGraph(data);
-  // });
+  d3.json(App.config.sentiments_totals_url, function(data) {
+    App.data = data;
+    // rffpdenderLoveHateGraph(data);
+    forceGraph(data);
+  });
 
   var pusher = new Pusher(App.config.pusher_app_id); // Replace with your app key
   var channel = pusher.subscribe(App.config.stream);
 
  channel.bind('total', function(data) {
    console.log(data);
-   forceGraph(data);
+   // forceGraph(data);
    // App.data = data;
    // renderLoveHateGraph(data);
  });

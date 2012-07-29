@@ -7,25 +7,33 @@ It uses [Datasift](http://datasift.com/) as data backend.
 
 ## Getting started
 
-1. Clone this project
+1. Sign up Datasift and Pusher<br/>
+Both [Datasift](http://datasift.com/) and [Pusher](http://pusher.com/) has free traial plan which is enough to try this application.
 
-2. Set up Rails app
+2. Clone this project
+
+3. Set up Rails app
 
         % bundle install
         % rake db:migrate
 
-3. Set Datasift use ID and API key in environment variables
+4. Set Datasift user ID and API key in environment variables
 
         % export DATASIFT_KEY=YOUR-API-KEY
         % export DATASIFT_USERNAME=YOUR-USER-NAME
 
-3. Run script which counts up joyance
+5. Set Pusher app ID, key and secret in environment variables
+
+        % export PUSHER_APP_ID=APP-ID
+        % export PUSHER_KEY=KEY-ID
+        % export PUSHER_SECRET=SECRET
+
+6. Run script which counts up joyance
 
         % rails runner "Counter.count_up :olympics"
+(You don't have to stop script to go to the next step)
 
-You don't have to stop script to go to step 4.
-
-4. Run server
+7. Run server
 
         % rails s
 
