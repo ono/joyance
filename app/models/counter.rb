@@ -37,7 +37,7 @@ class Counter < ActiveRecord::Base
     def push(counter, interaction)
       return unless pusher?
 
-      if !@last_push || @last_push < 3.seconds.ago
+      if !@last_push || @last_push < 1.seconds.ago
         total = total_by_sentiment counter.stream
         recent = recent_total counter.stream
 
