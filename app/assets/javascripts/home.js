@@ -11,7 +11,7 @@ App.config = {
   forceWidth: 900,
   forceHeight: 700,
   forceGravity: 0.05,
-  force_container_sel: "#force-graph"
+  force_container_sel: "#force-graph",
 };
 
 function renderLoveHateGraph(data) {
@@ -59,7 +59,7 @@ function renderLoveHateGraph(data) {
             });
   }
 
-function collidingBallsGraph(data) {
+function forceGraph(data) {
   var w = App.config.forceWidth,
       h = App.config.forceHeight,
       g = App.config.forceGravity;
@@ -69,8 +69,7 @@ function collidingBallsGraph(data) {
         sentiment: d.sentiment,
         radius: d.total
       };
-    }),
-    color = d3.scale.category10();
+    });
   App.nodes = nodes;
 
   var force = d3.layout.force()
@@ -92,15 +91,13 @@ function collidingBallsGraph(data) {
   svg.selectAll("circle")
       .data(nodes)
     .enter().append("svg:circle")
+      .attr("class", function(d) {
+        return "sentiment-" + d.sentiment;
+      })
       .attr("data-sentiment", function(d) { return d.sentiment; })
       .attr("r", function(d) {
-        console.log(d)
         return d.radius - 2;
       })
-      .style("fill", function(d, i) {
-        console.log(d);
-        return color(i % 3);
-      });
 
   force.on("tick", function(e) {
     var q = d3.geom.quadtree(nodes),
@@ -156,6 +153,6 @@ $(function (data) {
   d3.json(App.config.sentiments_totals_url, function(data) {
     App.data = data;
     // rffpdenderLoveHateGraph(data);
-    collidingBallsGraph(data);
+    forceGraph(data);
   });
 });
