@@ -9,8 +9,8 @@ App.config = {
   sentiments_totals_url: "/streams/olympics/total.json",
   graph_container_sel: "#love-hate-bar-graph",
 
-  forceWidth: 900,
-  forceHeight: 700,
+  forceWidth: 800,
+  forceHeight: 600,
   forceMaxSize: 300,
   forceGravity: 0.05,
   force_container_sel: "#force-graph",
