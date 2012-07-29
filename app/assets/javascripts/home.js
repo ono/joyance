@@ -4,6 +4,8 @@ App.config = {
   canvasWidth: 500,
   canvasHeight: 500,
 
+  pusher_app_id: "a8d6b011ca9900b8ece8",
+  stream: "olympics",
   sentiments_totals_url: "/streams/olympics/total.json",
   graph_container_sel: "#love-hate-bar-graph"
 };
@@ -59,4 +61,14 @@ $(function (data) {
     App.data = data;
     renderLoveHateGraph(data);
   });
+
+  var pusher = new Pusher(App.config.pusher_app_id); // Replace with your app key
+  var channel = pusher.subscribe(App.config.stream);
+
+   channel.bind('total', function(data) {
+     console.log(data);
+     App.data = data;
+     renderLoveHateGraph(data);
+   });
+
 });

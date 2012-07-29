@@ -16,7 +16,7 @@ class Counter < ActiveRecord::Base
         if intr.sentiment
           counter = get_instance(s.name, intr)
           counter.count ||= 0
-          counter.count += 1
+          counter.count += 10
           counter.save!
 
           push counter
