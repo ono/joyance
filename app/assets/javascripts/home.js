@@ -80,12 +80,12 @@ function collidingBallsGraph(data) {
       .size([w, h]);
 
   // Make the neutral node the mouse node
-  var mouseNode = _.find(App.nodes, function(n) { return n.sentiment == "neutral";});;
+  var mouseNode = _.find(App.nodes, function(n) { return n.sentiment == "neutral";});
   mouseNode.fixed = true;
 
   force.start();
 
-  var svg = d3.select("#collision-balls-graph").append("svg:svg")
+  var svg = d3.select(App.config.force_container_sel).append("svg:svg")
       .attr("width", w)
       .attr("height", h);
 
