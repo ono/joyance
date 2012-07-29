@@ -101,7 +101,7 @@ function updateForceGraph(data) {
   force.start();
 
   App.svg.selectAll("circle")
-      .data(nodes)
+      .data(nodes.slice(1)) // Ignore mouse node
     .enter().append("svg:circle")
       .attr("class", function(d) {
         return "sentiment-" + d.sentiment;
@@ -128,13 +128,14 @@ function updateForceGraph(data) {
 
   // Make the neutral node the mouse node
   // var mouseNode = _.find(App.nodes, function(n) { return n.sentiment == "neutral";});
-  // mouseNode.fixed = true;
-  // App.svg.on("mousemove", function() {
-  //   var p1 = d3.svg.mouse(this);
-  //   mouseNode.px = p1[0];
-  //   mouseNode.py = p1[1];
-  //   force.resume();
-  // });
+  var mouseNode = nodes[0];
+  mouseNode.fixed = true;
+  App.svg.on("mousemove", function() {
+    var p1 = d3.svg.mouse(this);
+    mouseNode.px = p1[0];
+    mouseNode.py = p1[1];
+    force.resume();
+  });
 
   function collide(node) {
     var r = node.radius + 16,
@@ -178,6 +179,7 @@ $(function () {
   channel.bind('recent', function(data) {
     // Filter out neutral
     data = _.reject(data, function(d) { return d.sentiment == "neutral" });
+    data.unshift({total: 0}); // Add dummy node for mouse movement
     console.log(data);
     if (!App.prevData) {
       initForceGraph(data);
