@@ -8,6 +8,13 @@ class Counter < ActiveRecord::Base
                     group("sentiment")
     end
 
+    def recent_total(stream)
+      recent_total = Counter.where(stream: stream).
+                      where("created_at > ?", 3.minutes.ago).
+                      select("sentiment, sum(count) as total").
+                      group("sentiment")
+    end
+
     def count_up(stream_name)
       s = Stream.new stream_name
       s.consume do |json|
@@ -32,14 +39,17 @@ class Counter < ActiveRecord::Base
 
       if !@last_push || @last_push < 3.seconds.ago
         total = total_by_sentiment counter.stream
+        recent = recent_total counter.stream
+
+        Pusher[counter.stream].trigger!('recent', recent.to_json)
         Pusher[counter.stream].trigger!('total', total.to_json)
         Pusher[counter.stream].trigger!('tweet', interaction.to_json)
         @last_push = Time.now
+
       end
     end
 
     def pusher?
-      p Pusher.app_id
       if ENV["DISABLE_PUSHER"] || !Pusher.app_id
         false
       else
