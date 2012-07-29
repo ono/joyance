@@ -14,6 +14,8 @@ App.config = {
   forceMaxSize: 200,
   forceGravity: 0.05,
   force_container_sel: "#force-graph",
+
+  newTweetSel: "#new-tweet",
 };
 
 function renderLoveHateGraph(data) {
@@ -187,8 +189,11 @@ $(function () {
     console.log(_.pluck(data, "total"));
   });
 
+  var newTweetSel = App.config.newTweetSel;
   channel.bind('tweet', function(data) {
     console.log(data);
+    $(newTweetSel).html(data.raw.interaction.content);
+    $(newTweetSel).attr("class", "sentiment-" + data.sentiment);
     // App.data = data;
     // renderLoveHateGraph(data);
   });

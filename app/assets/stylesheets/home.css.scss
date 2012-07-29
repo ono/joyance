@@ -2,14 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.sentiment-neutral {
-  fill: #999999;
+#force-graph {
+  .sentiment-neutral {
+    fill: #999999;
+  }
+
+  .sentiment-positive {
+    fill: blue;
+  }
+
+  .sentiment-negative {
+    fill: red;
+  }
 }
 
-.sentiment-positive {
-  fill: blue;
-}
+#new-tweet {
+  &.sentiment-positive {
+    color: blue;
+  }
 
-.sentiment-negative {
-  fill: red;
+  &.sentiment-negative {
+    color: red;
+  }
 }
