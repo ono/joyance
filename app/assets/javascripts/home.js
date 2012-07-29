@@ -166,6 +166,7 @@ $(function () {
   // Get json data
   d3.json(App.config.sentiments_totals_url, function(data) {
     App.data = data;
+    App.prevData = data;
     initForceGraph(data);
     // rffpdenderLoveHateGraph(data);
   });
@@ -177,6 +178,7 @@ $(function () {
    console.log(data);
    // forceGraph(data);
    updateForceGraph(data);
+   App.prevData = data;
    // App.data = data;
    // renderLoveHateGraph(data);
  });
