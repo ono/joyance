@@ -4,7 +4,7 @@ tag "Neutral"  { salience.content.sentiment <= 1 and salience.content.sentiment 
 tag "Negative" { salience.content.sentiment < -1 }
 
 return {
-interaction.sample < 1 and (
+interaction.sample < 50 and (
 interaction.content contains "olympic"
 or interaction.title contains "olympics"
 or links.title contains "olympics"
