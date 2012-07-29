@@ -172,6 +172,7 @@ $(function () {
  channel.bind('total', function(data) {
    console.log(data);
    // forceGraph(data);
+   updateForceGraph(data);
    // App.data = data;
    // renderLoveHateGraph(data);
  });
