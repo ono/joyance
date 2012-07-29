@@ -18,6 +18,7 @@ function renderLoveHateGraph(data) {
 
     var vis = d3.select("body")
         .append("svg:svg")              //create the SVG element inside the <body>
+            .attr("id", "pie_chart")
         .data([data])                   //associate our data with the document
             .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
             .attr("height", h)
@@ -67,8 +68,13 @@ $(function (data) {
 
    channel.bind('total', function(data) {
      console.log(data);
-     App.data = data;
-     renderLoveHateGraph(data);
+     // App.data = data;
+     // renderLoveHateGraph(data);
+   });
+   channel.bind('tweet', function(data) {
+     console.log(data);
+     // App.data = data;
+     // renderLoveHateGraph(data);
    });
 
 });

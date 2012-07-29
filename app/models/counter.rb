@@ -19,7 +19,7 @@ class Counter < ActiveRecord::Base
           counter.count += 10
           counter.save!
 
-          push counter
+          push counter, intr
 
           p "#{"%02d" % counter.hour}:#{"%02d" % counter.minute}-#{stream_name}-#{intr.sentiment}: #{counter.count}"
         end
@@ -27,11 +27,15 @@ class Counter < ActiveRecord::Base
       end
     end
 
-    def push(counter)
+    def push(counter, interaction)
       return unless pusher?
 
-      total = total_by_sentiment counter.stream
-      Pusher[counter.stream].trigger!('total', total.to_json)
+      if !@last_push || @last_push < 3.seconds.ago
+        total = total_by_sentiment counter.stream
+        Pusher[counter.stream].trigger!('total', total.to_json)
+        Pusher[counter.stream].trigger!('tweet', interaction.to_json)
+        @last_push = Time.now
+      end
     end
 
     def pusher?
