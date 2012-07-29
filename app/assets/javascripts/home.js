@@ -61,14 +61,25 @@ function renderLoveHateGraph(data) {
             });
   }
 
-function forceGraph(data) {
+function initForceGraph(data) {
+  var w = App.config.forceWidth,
+      h = App.config.forceHeight;
+
+  App.svg = d3.select(App.config.force_container_sel).append("svg:svg")
+      .attr("width", w)
+      .attr("height", h);
+
+  updateForceGraph(data);
+}
+
+function updateForceGraph(data) {
   var w = App.config.forceWidth,
       h = App.config.forceHeight,
-      g = App.config.forceGravity;
-
-  var nodes = data.map(function(d) {
+      g = App.config.forceGravity,
+    nodes = data.map(function(d) {
       return {
         sentiment: d.sentiment,
+        total: d.total,
         radius: d.total
       };
     });
@@ -86,20 +97,17 @@ function forceGraph(data) {
 
   force.start();
 
-  var svg = d3.select(App.config.force_container_sel).append("svg:svg")
-      .attr("width", w)
-      .attr("height", h);
-
-  svg.selectAll("circle")
+  App.svg.selectAll("circle")
       .data(nodes)
     .enter().append("svg:circle")
       .attr("class", function(d) {
         return "sentiment-" + d.sentiment;
       })
       .attr("data-sentiment", function(d) { return d.sentiment; })
+      .attr("data-total", function(d) { return d.total; })
       .attr("r", function(d) {
         return d.radius - 2;
-      })
+      });
 
   force.on("tick", function(e) {
     var q = d3.geom.quadtree(nodes),
@@ -110,12 +118,12 @@ function forceGraph(data) {
       q.visit(collide(nodes[i]));
     }
 
-    svg.selectAll("circle")
+    App.svg.selectAll("circle")
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
   });
 
-  svg.on("mousemove", function() {
+  App.svg.on("mousemove", function() {
     var p1 = d3.svg.mouse(this);
     mouseNode.px = p1[0];
     mouseNode.py = p1[1];
@@ -150,12 +158,12 @@ function forceGraph(data) {
   }
 }
 
-$(function (data) {
+$(function () {
   // Get json data
   d3.json(App.config.sentiments_totals_url, function(data) {
     App.data = data;
+    initForceGraph(data);
     // rffpdenderLoveHateGraph(data);
-    forceGraph(data);
   });
 
   var pusher = new Pusher(App.config.pusher_app_id); // Replace with your app key
