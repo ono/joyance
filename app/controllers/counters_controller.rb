@@ -10,9 +10,7 @@ class CountersController < ApplicationController
   end
 
   def stream_total
-    @counters = Counter.where(stream: params[:stream]).
-                    select("sentiment, sum(count) as total").
-                    group("sentiment")
+    @counters = Counter.total_by_sentiment params[:sentiment]
 
     respond_to do |format|
       format.html { render :total }
